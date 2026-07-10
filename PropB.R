@@ -27,4 +27,9 @@ if ("city" %in% colnames(df_house)) {
   df_house$city <- tools::toTitleCase(tolower(df_house$city)) 
 }
 
+if ("district" %in% colnames(df_house)) {
+  df_house$district <- trimws(gsub("\\s+", " ", df_house$district))
+  df_house$district <- tools::toTitleCase(tolower(df_house$district))
+}
+
 
