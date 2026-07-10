@@ -4,9 +4,21 @@
 library(shiny)
 library(bslib)
 library(leaflet)
+library(ggplot2)
 library(plotly)
 library(DT)
 library(shinycssloaders) 
-library(ggplot2)
 library(dplyr)
 library(scales) 
+
+# ==============================================================================
+# 2. PERSIAPAN DATA & PREPROCESSING
+# ==============================================================================
+
+# 1. Membaca data dengan fill = TRUE untuk mengatasi error sisaan koma Excel
+df_house <- read.csv("jabodetabek_house_price.csv", stringsAsFactors = FALSE, fill = TRUE)
+
+# 2. Membersihkan "kolom hantu" (kolom kosong yang terbaca sebagai X, X.1, dst dari Excel)
+df_house <- df_house[, !grepl("^X", names(df_house))]
+
+
