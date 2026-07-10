@@ -21,4 +21,10 @@ df_house <- read.csv("jabodetabek_house_price.csv", stringsAsFactors = FALSE, fi
 # 2. Membersihkan "kolom hantu" (kolom kosong yang terbaca sebagai X, X.1, dst dari Excel)
 df_house <- df_house[, !grepl("^X", names(df_house))]
 
+# --- PERBAIKAN TOTAL DATA GANDA & KONSISTENSI KAPITALISASI TEKS ---
+if ("city" %in% colnames(df_house)) {
+  df_house$city <- trimws(gsub("\\s+", " ", df_house$city)) 
+  df_house$city <- tools::toTitleCase(tolower(df_house$city)) 
+}
+
 
